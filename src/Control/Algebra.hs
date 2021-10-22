@@ -138,11 +138,11 @@ send sig = runIdentity <$> alg (fmap Identity . runIdentity) (inj sig) (Identity
 -- base
 
 instance Algebra (Lift IO) IO where
-  alg hdl (LiftWith with) = with hdl
+  alg hdl (LiftWith with) = with (\ctxH -> (() <$ ctxH ,hdl ctxH))
   {-# INLINE alg #-}
 
 instance Algebra (Lift Identity) Identity where
-  alg hdl (LiftWith with) = with hdl
+  alg hdl (LiftWith with) = with (\ctxH -> (() <$ ctxH ,hdl ctxH))
   {-# INLINE alg #-}
 
 instance Algebra Choose NonEmpty where

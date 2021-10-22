@@ -37,5 +37,5 @@ instance MonadTrans LiftC where
   {-# INLINE lift #-}
 
 instance Monad m => Algebra (Lift m) (LiftC m) where
-  alg hdl (LiftWith with) = LiftC . with (runM . hdl)
+  alg hdl (LiftWith with) = LiftC . with (\ctxH -> (() <$ ctxH , runM . hdl $ ctxH))
   {-# INLINE alg #-}

@@ -62,7 +62,7 @@ sendIO = sendM
 -- @since 1.0.0.0
 liftWith
   :: Has (Lift n) sig m
-  => (forall ctx . Functor ctx => Handler ctx m n -> ctx () -> n (ctx a))
+  => (forall ctx . Functor ctx => HandlerWithCtx ctx m n -> ctx () -> n (ctx a))
   -> m a
 liftWith with = send (LiftWith with)
 {-# INLINE liftWith #-}
