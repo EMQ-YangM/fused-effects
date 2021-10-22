@@ -1,6 +1,7 @@
 {-# LANGUAGE RankNTypes #-}
 module Control.Algebra.Handler
 ( Handler
+, HandlerWithCtx
 , (~<~)
 ) where
 
@@ -36,6 +37,8 @@ import Data.Functor.Compose
 --
 -- @since 1.1.0.0
 type Handler ctx m n = forall x . ctx (m x) -> n (ctx x)
+
+type HandlerWithCtx ctx m n = forall x . ctx (m x) -> (ctx() , n (ctx x))
 
 -- | Composition of handlers.
 --

@@ -25,6 +25,7 @@ module Control.Algebra
 , send
   -- * Re-exports
 , Handler
+, HandlerWithCtx
 , (~<~)
 , (:+:) (..)
 ) where
