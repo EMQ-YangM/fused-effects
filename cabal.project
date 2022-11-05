@@ -1,1 +1,10 @@
 packages: fused-effects.cabal
+
+source-repository-package
+  type: git
+  location: https://github.com/EMQ-YangM/io-sim.git
+  tag:  2a71222914ba1b0e95a266d9781d3a2031bcbd76
+  subdir:
+    io-classes
+    io-sim
+    strict-stm

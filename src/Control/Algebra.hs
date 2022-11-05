@@ -63,6 +63,7 @@ import qualified Control.Monad.Trans.Writer.CPS as Writer.CPS
 #endif
 import qualified Control.Monad.Trans.Writer.Lazy as Writer.Lazy
 import qualified Control.Monad.Trans.Writer.Strict as Writer.Strict
+import           Control.Monad.IOSim (IOSim)
 import           Data.Functor.Compose
 import           Data.Functor.Identity
 import           Data.List.NonEmpty (NonEmpty(..))
@@ -149,6 +150,10 @@ instance Algebra (Lift IO) IO where
 instance Algebra (Lift Identity) Identity where
   alg hdl (LiftWith with) = with hdl
   {-# INLINE alg #-}
+
+instance Algebra (Lift (IOSim s)) (IOSim s) where
+    alg hdl (LiftWith with) = with hdl
+    {-# INLINE alg #-}
 
 instance Algebra Choose NonEmpty where
   alg _ Choose ctx = (True <$ ctx) :| [ False <$ ctx ]
