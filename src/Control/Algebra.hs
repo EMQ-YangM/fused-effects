@@ -151,9 +151,9 @@ instance Algebra (Lift Identity) Identity where
   alg hdl (LiftWith with) = with hdl
   {-# INLINE alg #-}
 
-instance Algebra (Lift (IOSim s)) (IOSim s) where
-    alg hdl (LiftWith with) = with hdl
-    {-# INLINE alg #-}
+-- instance Algebra (Lift (IOSim s)) (IOSim s) where
+--     alg hdl (LiftWith with) = with hdl
+--     {-# INLINE alg #-}
 
 instance Algebra Choose NonEmpty where
   alg _ Choose ctx = (True <$ ctx) :| [ False <$ ctx ]
