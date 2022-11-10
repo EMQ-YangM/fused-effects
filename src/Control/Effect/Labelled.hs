@@ -95,12 +95,12 @@ newtype LabelledLift (label :: k) m a = LabelledLift (LiftC m a)
     )
 
 --  @since 1.1.2.2
-runLabelledLift :: forall m a. LabelledLift Lift m a -> LiftC m a
-runLabelledLift (LabelledLift l) = l
+runLabelledLift :: forall m a. LabelledLift Lift m a -> m a
+runLabelledLift (LabelledLift l) = runM l
 {-# INLINE runLabelledLift #-}
 
 instance Monad n => Algebra (Labelled Lift (Lift n)) (LabelledLift Lift n) where
-    alg hdl (Labelled sub) = LabelledLift . alg (runLabelledLift . hdl) sub
+    alg hdl (Labelled sub) = LabelledLift . alg (LiftC . runLabelledLift . hdl) sub
     {-# INLINE alg #-}
 
 -- | Given a @HasLabelledLift n sig m@ constraint in a signature carried by @m@, 'sendM'
@@ -109,7 +109,7 @@ instance Monad n => Algebra (Labelled Lift (Lift n)) (LabelledLift Lift n) where
 -- @since 1.1.2.2
 sendM
     :: forall a n m sig
-     . (HasLabelled Lift (Lift n) sig m, Monad n)
+     . Functor n => HasLabelledLift n sig m
     => n a
     -> m a
 sendM n = runUnderLabel @Lift (Lift.sendM @n n)
