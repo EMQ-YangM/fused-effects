@@ -117,9 +117,9 @@ library
     Control.Effect.Throw.Internal
     Control.Effect.Writer.Internal
   build-depends:
-      base          >= 4.9 && < 4.18
-    , transformers  >= 0.4 && < 0.6
-    , unliftio-core >= 0.2 && < 0.3
+      base          >= 4.9 
+    , transformers  >= 0.4 
+    , unliftio-core >= 0.2 
 
 
 test-suite examples
