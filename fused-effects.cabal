@@ -125,7 +125,7 @@ library
     Control.Effect.Throw.Internal
     Control.Effect.Writer.Internal
   build-depends:
-      base          >= 4.9 && < 4.19
+      base          >= 4.9 && < 4.21
     , transformers  >= 0.4 && < 0.7
     , unliftio-core >= 0.2 && < 0.3
     , io-sim
